@@ -4,6 +4,7 @@ from django.utils.functional import curry
 from django.views.decorators.http import require_POST
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
+from django.views.decorators.csrf import csrf_exempt
 from trackback.pingback import xmlrpc_dispatcher
 
 
@@ -36,7 +37,7 @@ def receive_trackback(request, content_type_id, object_id, form_class, template_
     
     
 
-
+@csrf_exempt
 def receive_pingback(request):
     """
     Handles XML-RPC Pingbacks.
