@@ -5,7 +5,7 @@ You may want to hook this URLconf into your Root-URLconf like this::
     
 """
 
-from django.conf.urls.defaults import *
+from django.conf.urls import url, patterns
 from trackback.forms import TrackbackForm
 
 
