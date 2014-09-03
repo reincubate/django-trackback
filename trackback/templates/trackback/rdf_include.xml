@@ -6,6 +6,6 @@
     rdf:about="{{ SITE_URL }}{{ object.get_absolute_url }}"
     dc:identifier="{{ SITE_URL }}{{ object.get_absolute_url }}"
     dc:title="{{ object.title }}"
-    trackback:ping="{{ SITE_URL }}{% url receive_trackback object.ct,object.pk %}" />
+    trackback:ping="{{ SITE_URL }}{% url "receive_trackback" object.ct object.pk %}" />
 </rdf:RDF>
 -->
