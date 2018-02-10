@@ -24,14 +24,14 @@ class TrackbackRdfNode(template.Node):
     """
     def __init__(self, obj):
         self.obj_name = obj
-        
-        
+
+
     def render(self, context):
         self.object = template.resolve_variable(self.obj_name, context)
         self.object.ct = ContentType.objects.get_for_model(self.object).pk
-        return render_to_string('trackback/rdf_include.xml', {'object': self.object, 'SITE_URL': "http://%s" % Site.objects.get_current().domain})
+        return render_to_string('trackback/rdf_include.xml', {'object': self.object, 'SITE_URL': "https://%s" % Site.objects.get_current().domain})
 
-    
+
 def get_trackback_rdf_for(parser, token):
     bits = token.contents.split()
     if len(bits) != 2:
@@ -44,24 +44,24 @@ get_trackback_rdf_for = register.tag(get_trackback_rdf_for)
 
 
 
-     
+
 class TrackbacksNode(template.Node):
     """
-    Get a list of Trackbacks for ``obj`` into the 
+    Get a list of Trackbacks for ``obj`` into the
     current template context as ``varname``.
-    
+
     """
     def __init__(self, obj, varname):
         self.varname = varname
         self.obj_name = obj
-    
-    
+
+
     def render(self, context):
         self.object = template.resolve_variable(self.obj_name, context)
         context[self.varname] = Trackback.objects.filter(content_type=ContentType.objects.get_for_model(self.object), object_id=self.object.pk).all()
         return ''
-  
- 
+
+
 def get_trackbacks_for(parser, token):
     bits = token.contents.split()
     if len(bits) != 4:
@@ -69,8 +69,8 @@ def get_trackbacks_for(parser, token):
     if bits[2] != 'as':
         raise template.TemplateSyntaxError, "second argument to get_trackbacks tag must be 'as'"
     return TrackbacksNode(bits[1], bits[3])
- 
-    
+
+
 get_trackbacks_for = register.tag(get_trackbacks_for)
 
 
@@ -81,19 +81,17 @@ class PingbackUrlNode(template.Node):
     """
     Returns the absolute pingback url including current hostname and protocol.
     FIXME: http currently hardcoded. Add support for https
-    
+
     """
     def __init__(self):
         self.site = Site.objects.get_current()
-        
+
     def render(self, context):
-        return u"http://%s%s" % (self.site.domain, reverse('receive_pingback'))
-        
-        
+        return u"https://%s%s" % (self.site.domain, reverse('receive_pingback'))
+
+
 def get_pingback_url(parser, token):
     return PingbackUrlNode()
 
 
 get_pingback_url = register.tag(get_pingback_url)
-
-
