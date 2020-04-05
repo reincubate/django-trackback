@@ -15,8 +15,6 @@ class ResolverRegistry(object):
     Pingback should be attached to.
     
     """
-    from django.conf import settings
-    from django.core.exceptions import ImproperlyConfigured
     resolvers = []
     
     def __init__(self):
@@ -26,6 +24,7 @@ class ResolverRegistry(object):
         tuple.
         
         """
+        from django.conf import settings
         resolver_list = getattr(settings, 'PINGBACK_RESOLVERS', DEFAULT_PINGBACK_RESOLVERS)
         for resolver in resolver_list:
             self.add(resolver)
@@ -37,6 +36,7 @@ class ResolverRegistry(object):
         added at the beginning of the list, otherwise at the end.
         
         """
+        from django.core.exceptions import ImproperlyConfigured
         if isinstance(resolver, basestring):
             self._import(resolver)
         
@@ -56,6 +56,7 @@ class ResolverRegistry(object):
         resolver function.
         
         """
+        from django.core.exceptions import ImproperlyConfigured
         try:
             dot = resolver.rindex('.')
         except ValueError:
