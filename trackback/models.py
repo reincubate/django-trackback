@@ -23,7 +23,7 @@ class Trackback(models.Model):
     blog_name = models.CharField(max_length=255, blank=True, null=True)
     excerpt = models.TextField(blank=True, null=True)
     
-    remote_ip = models.IPAddressField()
+    remote_ip = models.GenericIPAddressField()
     site = models.ForeignKey(Site)
     is_public = models.BooleanField(default=False)
     submit_date = models.DateTimeField(default=None)
