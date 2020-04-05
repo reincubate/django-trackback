@@ -1,5 +1,4 @@
 from django.core.urlresolvers import get_resolver, NoReverseMatch, Resolver404
-from django.contrib.sites.models import Site
 
 def decorated(target_url):
     """
@@ -7,6 +6,7 @@ def decorated(target_url):
     ``receives_pingbacks_for`` decorator.
 
     """
+    from django.contrib.sites.models import Site
     try:
         urlresolver = get_resolver(None)
         site = Site.objects.get_current()
@@ -26,6 +26,7 @@ def generic_view(target_url):
     object is served by the view.
 
     """
+    from django.contrib.sites.models import Site
     try:
         urlresolver = get_resolver(None)
         site = Site.objects.get_current()

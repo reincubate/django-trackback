@@ -2,9 +2,6 @@
 django-trackback - Handle trackbacks and pingbacks in every django-project
 
 """
-from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
-
 
 DEFAULT_PINGBACK_RESOLVERS = (
     'trackback.utils.resolvers.decorated',
@@ -18,6 +15,8 @@ class ResolverRegistry(object):
     Pingback should be attached to.
     
     """
+    from django.conf import settings
+    from django.core.exceptions import ImproperlyConfigured
     resolvers = []
     
     def __init__(self):
