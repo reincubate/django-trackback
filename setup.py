@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='django-trackback',
-    version='0.2.4',
+    version='0.2.5',
     description='A generic trackback and pingback app for Django',
     author='Arne Brodowski',
     author_email='arne@rcs4u.de',
