@@ -17,6 +17,6 @@ trackback_dict = {
 
 
 urlpatterns = [
-    url(r'^(?P<content_type_id>[\d]+)/(?P<object_id>[\d]+)/$', 'receive_trackback', trackback_dict, name="receive_trackback"),
-    url(r'^xml-rpc/$', 'receive_pingback', {}, name="receive_pingback"),
+    url(r'^(?P<content_type_id>[\d]+)/(?P<object_id>[\d]+)/$', receive_trackback, trackback_dict, name="receive_trackback"),
+    url(r'^xml-rpc/$', receive_pingback, {}, name="receive_pingback"),
 ]
