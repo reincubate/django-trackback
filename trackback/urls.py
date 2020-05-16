@@ -5,8 +5,9 @@ You may want to hook this URLconf into your Root-URLconf like this::
     
 """
 
-from django.conf.urls import url, patterns
+from django.conf.urls import url
 from trackback.forms import TrackbackForm
+from trackback.views import receive_trackback, receive_pingback
 
 
 trackback_dict = {
@@ -15,7 +16,7 @@ trackback_dict = {
 }
 
 
-urlpatterns = patterns('trackback.views',
+urlpatterns = [
     url(r'^(?P<content_type_id>[\d]+)/(?P<object_id>[\d]+)/$', 'receive_trackback', trackback_dict, name="receive_trackback"),
     url(r'^xml-rpc/$', 'receive_pingback', {}, name="receive_pingback"),
-)
+]
